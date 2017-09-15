@@ -8,8 +8,8 @@ class Class
     
       def #{attr_name}=(value)
         @#{attr_name}_history = [] if @#{attr_name}_history.nil?
-        @#{attr_name}_history.push(@#{attr_name})
-        @#{attr_name} = value
+        @#{attr_name}_history.push(@#{attr_name}) #push the pervious value of the getter onto the array
+        @#{attr_name} = value #set the getter to the new value
       end
     }
   end

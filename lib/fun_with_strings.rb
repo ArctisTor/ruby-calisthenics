@@ -31,8 +31,46 @@ module FunWithStrings
     return hash
     
   end
+  
+  
   def anagram_groups
-    return []
+    
+    if self.size == 0
+      return []
+    end
+    
+    words = self.downcase.split(' ')
+    puts "words: #{words}"
+    anagram = []
+    
+    words.each { |word|
+      
+      puts "word: #{word}"
+      combinationArray = []
+      combinationArray.push(word)
+      
+      word.permutation { |combination|
+      
+        if words.include?(combination) && !combinationArray.include?(combination)
+          
+          combinationArray.push(combination)
+          
+        end
+      
+        
+      }
+      
+      combinationArray.sort!
+      
+      if combinationArray.length > 0 && !anagram.include?(combinationArray)
+        anagram.push(combinationArray)
+      end
+      
+    }
+    
+    puts "anagram #{anagram}"
+    
+    return anagram
   end
 end
 
@@ -40,4 +78,10 @@ end
 
 class String
   include FunWithStrings
+  
+  def permutation(&block)
+    arr = split(//)
+    arr.permutation { |i| yield i.join }
+  end
+  
 end
